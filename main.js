@@ -11,7 +11,6 @@ function getComputerChoice(){
 }
 
 function playRound(playerSelection, computerSelection){
-    playerSelection = playerSelection.toLowerCase();
     if (playerSelection == computerSelection) {
         let compTemp = getComputerChoice();
         return(playRound(playerSelection, compTemp));
@@ -40,16 +39,27 @@ function playRound(playerSelection, computerSelection){
 }
 
 function game(){
+    
     let a = 0;
-    while(a < 5){
-        let userChoise = prompt("Please enter your choice");
-        while (!(userChoise == "rock" | userChoise == "scissors" | userChoise == "paper")){
-            userChoise = prompt("Please try again");
-        }
+    const container = document.querySelector(".buttons");
+    const textContatiner = document.querySelector(".textLine")
+    const textReturn = document.createElement('p');
+    container.addEventListener('click', (event) =>{
+        textReturn.remove();
+        console.log(event.target.id)
+        let userChoise = event.target.id;
         let computerChoice = getComputerChoice();
-        alert(playRound(userChoise, computerChoice));
-        a ++;
-    }
+        
+
+        
+        textReturn.classList.add("textBox")
+        textReturn.textContent = playRound(userChoise,computerChoice);
+        textContatiner.appendChild(textReturn);
+    })
+    
+    
+    a ++;
+    
 }
 
 game()
